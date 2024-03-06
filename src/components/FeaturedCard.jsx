@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 export const FeaturedCard = ({ title, desc, img, featured = null }) => {
   const router = useRouter();
   return (
@@ -32,15 +33,11 @@ export const FeaturedCard = ({ title, desc, img, featured = null }) => {
           </div>
         </div>
         <div>
-          <div
-            onClick={(e) => {
-              router.push("/details");
-            }}
-          >
+          <Link href="/details">
             <Button className="text-[#fff] bg-[#4B98F8]">
               Try This Plugin
             </Button>
-          </div>
+          </Link>
           <p className="text-[12px] text-[#9591A3] text-right mt-2">
             In-app purchases
           </p>
