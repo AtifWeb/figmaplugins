@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Popularcard } from "./Popularcard";
+import Link from "next/link";
 export const SimilarPlugins = () => {
   return (
     <div>
@@ -8,12 +9,14 @@ export const SimilarPlugins = () => {
         <h1 className="text-[20px] text-[#1F1F1F] font-semibold">
           Popular Plugins
         </h1>
-        <Button
-          variant="ghost"
-          className="text-[#A359FF] text-[14px] font-medium"
-        >
-          View All
-        </Button>
+        <Link href="/">
+          <Button
+            variant="ghost"
+            className="text-[#A359FF] text-[14px] font-medium"
+          >
+            View All
+          </Button>
+        </Link>
       </div>
       <div className="grid grid-cols-4  gap-6">
         <Popularcard

@@ -13,6 +13,7 @@ export default function Home() {
       <div className="w-[1140px] flex flex-col gap-[42px] mx-auto pt-[50px]">
         <Welcome />
         <FeaturedCard
+          url="/details"
           featured
           img="/img/featured.svg"
           title="ARC - Bend your type!"

@@ -1,22 +1,45 @@
+"use client";
 import { FeaturedCard } from "@/components/FeaturedCard";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SimilarPlugins } from "@/components/SimilarPlugins";
 import { Button } from "@/components/ui/button";
-export default function Home() {
+import { useEffect } from "react";
+export default function Details() {
+  useEffect(() => {
+    new Splide(".splide3", {
+      pagination: false,
+    }).mount();
+  }, []);
   return (
     <div>
       <Header />
 
       <div className="w-[1140px] flex flex-col gap-[42px] mx-auto pt-[50px]">
         <FeaturedCard
+          url="https://www.figma.com/community/plugin/762070688792833472/arc-bend-your-type"
           img="/img/featured.svg"
           title="ARC - Bend your type!"
           desc="Curve your text upward, downward or into a circle"
         />
-
-        <img src="/img/long-pic-card.svg" className="w-full" alt="" />
-
+        <section class="splide splide3">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide">
+                <img src="/img/long-pic-card.svg" className="w-full" alt="" />
+              </li>
+              <li class="splide__slide">
+                <img src="/img/long-pic-card.svg" className="w-full" alt="" />
+              </li>
+              <li class="splide__slide">
+                <img src="/img/long-pic-card.svg" className="w-full" alt="" />
+              </li>
+              <li class="splide__slide">
+                <img src="/img/long-pic-card.svg" className="w-full" alt="" />
+              </li>
+            </ul>
+          </div>
+        </section>
         <div className="grid grid-cols-[1fr_274px]  gap-[123px]">
           <div className="flex flex-col gap-[27px]">
             <h1 className="text-[20px] font-semibold text-[#150E31]">About</h1>
