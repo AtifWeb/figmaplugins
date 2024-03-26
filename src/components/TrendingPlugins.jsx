@@ -3,14 +3,26 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { TrendingPluginCard } from "./TrendingPluginCard";
 import Link from "next/link";
+import { TrendingPluginCardSkeleton } from "./TrendingPluginCardSkeleton";
 
-export const TrendingPlugins = () => {
+export const TrendingPlugins = ({ trendingddata }) => {
   useEffect(() => {
-    new Splide(".splide2", {
-      perPage: 2,
-      gap: 24,
-    }).mount();
-  }, []);
+    if (trendingddata == null) {
+      new Splide(".splides2", {
+        perPage: 2,
+        gap: 24,
+        pagination: false,
+      }).mount();
+    }
+
+    if (trendingddata?.length > 0) {
+      new Splide(".splide2", {
+        perPage: 2,
+        gap: 24,
+        pagination: false,
+      }).mount();
+    }
+  }, [trendingddata]);
   return (
     <div>
       <div className="flex items-center justify-between mb-[24px]">
@@ -26,45 +38,40 @@ export const TrendingPlugins = () => {
           </Button>
         </Link>
       </div>
+      {trendingddata?.length > 0 && (
+        <section class="splide splide2">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {trendingddata.map((EachPlugin) => (
+                <li class="splide__slide">
+                  <TrendingPluginCard
+                    title={EachPlugin["pluginName"]}
+                    desc={EachPlugin["about"].substring(0, 100)}
+                    img={EachPlugin["logo"]}
+                    id={EachPlugin["_id"]}
+                    key={EachPlugin["_id"]}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
-      <section class="splide splide2">
-        <div class="splide__track">
-          <ul class="splide__list">
-            <li class="splide__slide">
-              <TrendingPluginCard
-                title="Button Design System Generator"
-                desc="Transform your design system with this plugin crafted to automate"
-                img="/img/a.svg"
-                url="https://www.figma.com/community/plugin/1344368111040867237/button-design-system-generator"
-              />
-            </li>
-            <li class="splide__slide">
-              <TrendingPluginCard
-                title="ARC - Bend your type!"
-                desc="Curve your text upward, downward or into a circle"
-                img="/img/arc.svg"
-                url="https://www.figma.com/community/plugin/1159123024924461424/html-to-design"
-              />
-            </li>
-            <li class="splide__slide">
-              <TrendingPluginCard
-                title="Button Design System Generator"
-                desc="Transform your design system with this plugin crafted to automate"
-                img="/img/a.svg"
-                url="https://www.figma.com/community/plugin/1344368111040867237/button-design-system-generator"
-              />
-            </li>
-            <li class="splide__slide">
-              <TrendingPluginCard
-                title="ARC - Bend your type!"
-                desc="Curve your text upward, downward or into a circle"
-                img="/img/arc.svg"
-                url="https://www.figma.com/community/plugin/1159123024924461424/html-to-design"
-              />
-            </li>
-          </ul>
-        </div>
-      </section>
+      {trendingddata == null && (
+        <section class="splide splides2">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide">
+                <TrendingPluginCardSkeleton />
+              </li>
+              <li class="splide__slide">
+                <TrendingPluginCardSkeleton />
+              </li>
+            </ul>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

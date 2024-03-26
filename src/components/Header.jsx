@@ -12,7 +12,9 @@ export const Header = () => {
         <Button variant="ghost" className="text-[#54575D] text-[14px]">
           Contact
         </Button>
-        <Button className="bg-[#A359FF]">Submit Your Plugin</Button>
+        <Link href="/login">
+          <Button className="bg-[#A359FF]">Submit Your Plugin</Button>
+        </Link>
       </div>
     </div>
   );

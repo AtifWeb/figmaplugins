@@ -3,13 +3,25 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Popularcard } from "./Popularcard";
 import Link from "next/link";
-export const PopularPlugins = () => {
+import { PopularcardSkeleton } from "./PopularcardSkeleton";
+export const PopularPlugins = ({ popularddata }) => {
   useEffect(() => {
-    new Splide(".splide1", {
-      perPage: 4,
-      gap: 24,
-    }).mount();
-  }, []);
+    if (popularddata == null) {
+      new Splide(".splides1", {
+        perPage: 4,
+        gap: 24,
+        pagination: false,
+      }).mount();
+    }
+
+    if (popularddata != null && popularddata.length > 0) {
+      new Splide(".splide1", {
+        perPage: 4,
+        gap: 24,
+        pagination: false,
+      }).mount();
+    }
+  }, [popularddata]);
   return (
     <div>
       <div className="flex items-center justify-between mb-[26px]">
@@ -25,70 +37,45 @@ export const PopularPlugins = () => {
           </Button>
         </Link>
       </div>
-
-      <section class="splide splide1">
-        <div class="splide__track">
-          <ul class="splide__list">
-            <li class="splide__slide">
-              <Popularcard
-                title="Wireframe"
-                img="/img/wireframe.svg"
-                desc="Free Wireframing tool for everyone"
-              />
-            </li>
-            <li class="splide__slide">
-              <Popularcard
-                title="LottieFiles - Create animations"
-                img="/img/lottie.svg"
-                desc="Animate Your Designs with Lottie Animations"
-              />
-            </li>
-            <li class="splide__slide">
-              <Popularcard
-                title="Artboard Mockups"
-                img="/img/artboard.svg"
-                desc="Showcase your brand, products, and applications"
-              />
-            </li>
-            <li class="splide__slide">
-              <Popularcard
-                title="Image Tracer"
-                img="/img/tracer.svg"
-                desc="Easily convert images into vector layers directly in Figma."
-              />
-            </li>
-
-            <li class="splide__slide">
-              <Popularcard
-                title="Wireframe"
-                img="/img/wireframe.svg"
-                desc="Free Wireframing tool for everyone"
-              />
-            </li>
-            <li class="splide__slide">
-              <Popularcard
-                title="LottieFiles - Create animations"
-                img="/img/lottie.svg"
-                desc="Animate Your Designs with Lottie Animations"
-              />
-            </li>
-            <li class="splide__slide">
-              <Popularcard
-                title="Artboard Mockups"
-                img="/img/artboard.svg"
-                desc="Showcase your brand, products, and applications"
-              />
-            </li>
-            <li class="splide__slide">
-              <Popularcard
-                title="Image Tracer"
-                img="/img/tracer.svg"
-                desc="Easily convert images into vector layers directly in Figma."
-              />
-            </li>
-          </ul>
-        </div>
-      </section>
+      {popularddata?.length > 0 && (
+        <section class="splide splide1">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {popularddata.map((EachPlugin) => (
+                <li class="splide__slide">
+                  <Popularcard
+                    title={EachPlugin["pluginName"]}
+                    desc={EachPlugin["about"].substring(0, 100)}
+                    img={EachPlugin["logo"]}
+                    id={EachPlugin["_id"]}
+                    key={EachPlugin["_id"]}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+      {popularddata == null && (
+        <section class="splide splides1">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide">
+                <PopularcardSkeleton />
+              </li>
+              <li class="splide__slide">
+                <PopularcardSkeleton />
+              </li>
+              <li class="splide__slide">
+                <PopularcardSkeleton />
+              </li>
+              <li class="splide__slide">
+                <PopularcardSkeleton />
+              </li>
+            </ul>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

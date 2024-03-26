@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-export const RecentlyAddedCard = ({ title, desc, img, url }) => {
+export const RecentlyAddedCard = ({ title, desc, img, id }) => {
   return (
-    <Link href={url}>
+    <Link href={`/details/${id}`}>
       <Card className="flex h-full hover:bg-[#F7F6F4] transition-all duration-400">
         <CardHeader className="flex flex-row flex-1 !items-center">
           <div className="flex flex-row !items-center gap-4 flex-1">

@@ -91,3 +91,42 @@
 .splide__arrow--next {
   right: -4rem !important;
 }
+
+.TagsInputWrapper .rti--container {
+  min-height: 52px;
+  padding-left: 1rem;
+  border: 1px solid #e2e8f0 !important;
+}
+.TagsInputWrapper .rti--container input {
+  width: 100%;
+  flex: 1;
+}
+
+/* waitingarea */
+.waitingarea {
+  position: relative;
+}
+.waitingarea::after {
+  height: 100%;
+  width: 20px;
+  background-color: #ffffff21;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  content: "";
+  animation: leftoright 2s ease-in infinite;
+}
+
+.about-work {
+  color: #787583;
+  font-size: 16px;
+}
+
+@keyframes leftoright {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: 100%;
+  }
+}
