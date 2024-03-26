@@ -16,8 +16,8 @@ import {
 } from "@/components/ui/select";
 
 import { TagsInput } from "react-tag-input-component";
-
-import SimpleMdeReact from "react-simplemde-editor";
+import dynamic from "next/dynamic";
+// import SimpleMdeReact from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { Avatar } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
@@ -27,7 +27,9 @@ import { uploadFileImage } from "@/api/firebase";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { savePlugin } from "@/api/savePlugin";
-
+const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 export const PostPlugin = () => {
   const [savestatus, setsavestatus] = useState(false);
   const [tags, setTags] = useState([]);
